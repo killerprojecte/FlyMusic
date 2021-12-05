@@ -1,0 +1,7 @@
+name: FlyMusic
+version: '${version}'
+main: flyproject.flymusic.FlyMusic
+api-version: 1.13
+depend: [ AmazingBot ]
+authors: [ FlyProject ]
+description: A MusicBot for AmazingBot in bukkit
