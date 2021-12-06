@@ -1,21 +1,18 @@
 package flyproject.flymusic;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class JsonApi {
-    public static int getString(String str, String key) {
-        String[] split = key.split("\\.");
-        if (split.length > 1) {
-            for (String s : split) {
-                String targetKey = key.substring(key.indexOf(".") + 1);
-                JSONObject jsonObject = JSONObject.parseObject(str);
-                int string = jsonObject.getInteger(s);
-                return jsonObject.getInteger(targetKey);
-            }
-        }
-        // 没有"." 直接取
-        JSONObject jsonObject = JSONObject.parseObject(str);
-        return jsonObject.getInteger(key);
+    public static int getSongID(String str) {
+                String resultStr = str;
+
+                JsonParser jp = new JsonParser();
+                //将json字符串转化成json对象
+                JsonObject jo = jp.parse(resultStr).getAsJsonObject();
+                int id = jo.get("result").getAsJsonObject().get("songs")
+                        .getAsJsonObject().get("id").getAsInt();
+                return id;
     }
 
 }

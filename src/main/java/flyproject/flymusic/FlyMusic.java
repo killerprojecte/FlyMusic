@@ -22,7 +22,7 @@ public final class FlyMusic extends JavaPlugin implements Listener {
             String json = getJson.get("https://netemapi.vercel.app/search?keywords=" + arg + "limit=1?type=1?offset=1\n");
             getLogger().info(json);
             String key = "result.songs.id";
-            String output = JsonApi.getString(json,key);
+            String output = String.valueOf(JsonApi.getSongID(json));
             event.response(output);
         }
     }
