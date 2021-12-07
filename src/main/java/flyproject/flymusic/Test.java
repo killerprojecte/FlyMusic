@@ -16,38 +16,39 @@ import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
-        /*
         Scanner sc = new Scanner(System.in);
-        System.out.println("Input Username...");
-        String username = sc.next();
-        System.out.println("Input Password");
-        String password = sc.next();
-        System.out.println("Login...");
-        String passwordmd5 = getMD5Str(password);
-        NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
-        neteaseUserAPI.login(username,passwordmd5);
-        NeteaseSearchAPI nsa = new NeteaseSearchAPI();
-        System.out.println("Input Song name...");
-        NeteaseResponseBody test1 = nsa.search(sc.next(),1,1,0,neteaseUserAPI.getCookie());
-        int songid = JsonApi.getSongID(test1.getBody());
-        if (NeteaseSongAPI.checkMusic(String.valueOf(songid),neteaseUserAPI.getCookie())){
-            String urljson = NeteaseSongAPI.musicUrl(String.valueOf(songid),"999000",neteaseUserAPI.getCookie()).getBody();
-            String url = JsonApi.getSongURL(urljson);
-            System.out.println(url);
-            String picjson = getJson.get("https://netemapi.vercel.app/song/detail?ids=" + songid);
-            String pic = JsonApi.getSongPic(picjson);
-            System.out.println(pic);
-            String art = JsonApi.getSongArt(picjson);
-            String name = JsonApi.getSongName(picjson);
-            System.out.println(art);
-            System.out.println(name);
-        }
-
-         */
+        System.out.println("API运作调试系统 输入 网易 进入网易云音乐调试\n" +
+                "输入 QQ 进入QQ音乐调试");
+        String status = sc.next();
+        if (status.equals("网易")){
+            System.out.println("输入网易云邮箱");
+            String username = sc.next();
+            System.out.println("输入密码");
+            String password = sc.next();
+            System.out.println("登陆中");
+            String passwordmd5 = getMD5Str(password);
+            NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
+            neteaseUserAPI.login(username,passwordmd5);
+            NeteaseSearchAPI nsa = new NeteaseSearchAPI();
+            System.out.println("输入曲名");
+            NeteaseResponseBody test1 = nsa.search(sc.next(),1,1,0,neteaseUserAPI.getCookie());
+            int songid = JsonApi.getSongID(test1.getBody());
+            if (NeteaseSongAPI.checkMusic(String.valueOf(songid),neteaseUserAPI.getCookie())){
+                String urljson = NeteaseSongAPI.musicUrl(String.valueOf(songid),"999000",neteaseUserAPI.getCookie()).getBody();
+                String url = JsonApi.getSongURL(urljson);
+                System.out.println(url);
+                String picjson = getJson.get("https://netemapi.vercel.app/song/detail?ids=" + songid);
+                String pic = JsonApi.getSongPic(picjson);
+                System.out.println(pic);
+                String art = JsonApi.getSongArt(picjson);
+                String name = JsonApi.getSongName(picjson);
+                System.out.println(art);
+                System.out.println(name);
+            }
+        } else {
         QQApi aapi = new QQApi();
-        Scanner sc = new Scanner(System.in);
         try {
-
+            System.out.println("输入歌曲名称");
             MusicInfo musicInfo = aapi.get(sc.next());
             System.out.println(musicInfo.title);
             System.out.println(musicInfo.desc);
@@ -59,6 +60,9 @@ public class Test {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        }
+
+
 
     }
     public static String getMD5Str(String str) {
