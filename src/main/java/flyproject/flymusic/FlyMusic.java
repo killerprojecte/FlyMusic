@@ -37,16 +37,16 @@ public final class FlyMusic extends JavaPlugin implements Listener {
                 "§e[Only published on MCBBS forum and Github]");
         saveDefaultConfig();
         if (getConfig().getString("source").equals("net")){
-            if (getConfig().getString("type").equals("mail")){
-                String username = getConfig().getString("username");
-                String password = getConfig().getString("password");
+            if (getConfig().getString("net.type").equals("mail")){
+                String username = getConfig().getString("net.username");
+                String password = getConfig().getString("net.password");
                 String passwordmd5 = getMD5Str(password);
                 NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
                 neteaseUserAPI.login(username,passwordmd5);
                 cookie = neteaseUserAPI.getCookie();
-            } else if (getConfig().getString("type").equals("phone")){
-                String username = getConfig().getString("username");
-                String password = getConfig().getString("password");
+            } else if (getConfig().getString("net.type").equals("net.phone")){
+                String username = getConfig().getString("net.username");
+                String password = getConfig().getString("net.password");
                 String passwordmd5 = getMD5Str(password);
                 NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
                 neteaseUserAPI.loginPhone(username,passwordmd5);
