@@ -1,6 +1,8 @@
 package flyproject.flymusic;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -59,6 +61,7 @@ public class QQApi implements MusicSource {
         JsonArray ss = JsonParser.parseString(new String(Utils.readAll(huc.getInputStream()), StandardCharsets.UTF_8))
                 .getAsJsonObject().get("data").getAsJsonObject().get("song").getAsJsonObject().get("list")
                 .getAsJsonArray();
+
         JsonObject song = ss.get(0).getAsJsonObject();// .data.song.list
         String mid = song.get("songmid").getAsString();
         String musicURL = queryRealUrl(mid);

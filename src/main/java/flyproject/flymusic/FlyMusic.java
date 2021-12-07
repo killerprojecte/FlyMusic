@@ -36,25 +36,24 @@ public final class FlyMusic extends JavaPlugin implements Listener {
                 "§c§lPlease respect the copyright of the author\n" +
                 "§e[Only published on MCBBS forum and Github]");
         saveDefaultConfig();
+        if (getConfig().getString("net.type").equals("mail")){
+            String username = getConfig().getString("net.username");
+            String password = getConfig().getString("net.password");
+            String passwordmd5 = getMD5Str(password);
+            NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
+            neteaseUserAPI.login(username,passwordmd5);
+            cookie = neteaseUserAPI.getCookie();
+        } else if (getConfig().getString("net.type").equals("net.phone")){
+            String username = getConfig().getString("net.username");
+            String password = getConfig().getString("net.password");
+            String passwordmd5 = getMD5Str(password);
+            NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
+            neteaseUserAPI.loginPhone(username,passwordmd5);
+            cookie = neteaseUserAPI.getCookie();
+        } else {
+            getLogger().info("登录失败");
+        }
         if (getConfig().getString("source").equals("net")){
-            if (getConfig().getString("net.type").equals("mail")){
-                String username = getConfig().getString("net.username");
-                String password = getConfig().getString("net.password");
-                String passwordmd5 = getMD5Str(password);
-                NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
-                neteaseUserAPI.login(username,passwordmd5);
-                cookie = neteaseUserAPI.getCookie();
-            } else if (getConfig().getString("net.type").equals("net.phone")){
-                String username = getConfig().getString("net.username");
-                String password = getConfig().getString("net.password");
-                String passwordmd5 = getMD5Str(password);
-                NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
-                neteaseUserAPI.loginPhone(username,passwordmd5);
-                cookie = neteaseUserAPI.getCookie();
-            } else {
-                getLogger().info("登录失败 插件卸载");
-                this.onDisable();
-            }
             Bukkit.getPluginManager().registerEvents(new NetEvent(),this);
             getLogger().info("登录成功");
         } else if (getConfig().getString("source").equals("qq")){
@@ -63,6 +62,8 @@ public final class FlyMusic extends JavaPlugin implements Listener {
             getLogger().info("请检查配置文件!");
             onDisable();
         }
+        Bukkit.getPluginManager().registerEvents(new DoubleEvent(),this);
+
         // Plugin startup logic
 
     }
