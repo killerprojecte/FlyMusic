@@ -1,0 +1,8 @@
+#登陆类型
+#手机: phone
+#邮箱: mail
+type: "mail"
+#账号
+username: "00000@email.com"
+#密码 自动md5加密!!! 请不要手动加密
+password: "000000000"

@@ -20,7 +20,7 @@ repositories {
 shadowJar{
     manifest {
         attributes(
-                "Main-Class" : "com.rylinaux.plugman.PlugMan"
+                "Main-Class" : "flyproject.flymusic.Test"
         )
     }
 }
@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     compileOnly 'org.spigotmc:spigot-api:1.13-R0.1-SNAPSHOT'
     compileOnly fileTree(dir: 'libs',includes: ['*.jar'])
+    implementation group: 'ltd.icecold', name: 'OrangeAPI', version: '1.0.1'
 }
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
