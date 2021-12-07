@@ -117,4 +117,5 @@ run/
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 !AmazingBot-3.2.25.jar
+!OrangeAPI-1.0.3.jar
 !libs/

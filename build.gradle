@@ -28,8 +28,8 @@ shadowJar{
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     compileOnly 'org.spigotmc:spigot-api:1.13-R0.1-SNAPSHOT'
-    compileOnly fileTree(dir: 'libs',includes: ['*.jar'])
-    implementation group: 'ltd.icecold', name: 'OrangeAPI', version: '1.0.1'
+    compileOnly fileTree(dir: 'libs',includes: ['AmazingBot-3.2.25.jar'])
+    implementation fileTree(dir: 'libs',includes: ['OrangeAPI-1.0.3.jar'])
 }
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

@@ -37,7 +37,7 @@ public class Test {
                 String urljson = NeteaseSongAPI.musicUrl(String.valueOf(songid),"999000",neteaseUserAPI.getCookie()).getBody();
                 String url = JsonApi.getSongURL(urljson);
                 System.out.println(url);
-                String picjson = getJson.get("https://netemapi.vercel.app/song/detail?ids=" + songid);
+                String picjson = getJson.get("http://music.163.com/api/v3/song/detail?id=" + songid + "&c=[{%22id%22:%22" + songid + "%22}]");
                 String pic = JsonApi.getSongPic(picjson);
                 System.out.println(pic);
                 String art = JsonApi.getSongArt(picjson);
