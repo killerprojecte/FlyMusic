@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
+        /*
         Scanner sc = new Scanner(System.in);
         System.out.println("Input Username...");
         String username = sc.next();
@@ -41,6 +42,24 @@ public class Test {
             System.out.println(art);
             System.out.println(name);
         }
+
+         */
+        QQApi aapi = new QQApi();
+        Scanner sc = new Scanner(System.in);
+        try {
+
+            MusicInfo musicInfo = aapi.get(sc.next());
+            System.out.println(musicInfo.title);
+            System.out.println(musicInfo.desc);
+            System.out.println(musicInfo.purl);
+            System.out.println(musicInfo.murl);
+            System.out.println(musicInfo.jurl);
+            System.out.println(musicInfo.icon);
+            System.out.println(musicInfo.appid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     public static String getMD5Str(String str) {
         byte[] digest = null;
