@@ -9,4 +9,5 @@ net:
   password: "000000000"
 #网易云: net
 #QQ音乐: qq
+#酷狗音乐: kugou
 source: "net"

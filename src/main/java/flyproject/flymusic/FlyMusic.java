@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -58,9 +59,12 @@ public final class FlyMusic extends JavaPlugin implements Listener {
             getLogger().info("登录成功");
         } else if (getConfig().getString("source").equals("qq")){
             Bukkit.getPluginManager().registerEvents(new QQEvent(),this);
+        } else if (getConfig().getString("source").equals("kugou")){
+            Bukkit.getPluginManager().registerEvents(new KugouEvent(),this);
         } else {
             getLogger().info("请检查配置文件!");
             onDisable();
+            return;
         }
         Bukkit.getPluginManager().registerEvents(new DoubleEvent(),this);
 
@@ -71,13 +75,10 @@ public final class FlyMusic extends JavaPlugin implements Listener {
         byte[] digest = null;
         try {
             MessageDigest md5 = MessageDigest.getInstance("md5");
-            digest  = md5.digest(str.getBytes("utf-8"));
+            digest  = md5.digest(str.getBytes(StandardCharsets.UTF_8));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
-        //16是表示转换为16进制数
         String md5Str = new BigInteger(1, digest).toString(16);
         return md5Str;
     }

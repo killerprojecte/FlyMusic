@@ -41,7 +41,7 @@ public class NetEvent implements Listener {
             if (NeteaseSongAPI.checkMusic(String.valueOf(songid),cookie)){
                 String urljson = NeteaseSongAPI.musicUrl(String.valueOf(songid),"999000",cookie).getBody();
                 String url = JsonApi.getSongURL(urljson);
-                String picjson = getJson.get("https://netemapi.vercel.app/song/detail?ids=" + songid);
+                String picjson = getJson.get("http://music.163.com/api/v3/song/detail?id=" + songid + "&c=[{%22id%22:%22" + songid + "%22}]");
                 String pic = JsonApi.getSongPic(picjson);
                 String art = JsonApi.getSongArt(picjson);
                 String name = JsonApi.getSongName(picjson);

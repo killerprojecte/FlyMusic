@@ -51,8 +51,25 @@ public class DoubleEvent implements Listener {
                         pic,
                         url
                 ));
-
             } else {
+                event.response("歌曲不存在");
+            }
+
+        } else if (event.getMsg().startsWith("酷狗 ")) {
+            String arg = event.getMsg().replace("酷狗 ", "");
+            KugouApi aapi = new KugouApi();
+            System.out.println(arg);
+            try {
+                MusicInfo musicInfo = aapi.get(arg);
+                event.response(new MusicShare(
+                        MusicKind.KugouMusic,
+                        musicInfo.title,
+                        musicInfo.desc + "- FlyMusic",
+                        musicInfo.jurl,
+                        musicInfo.purl,
+                        musicInfo.murl
+                ));
+            } catch (Exception e) {
                 event.response("歌曲不存在");
             }
 

@@ -18,7 +18,8 @@ public class Test {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("API运作调试系统 输入 网易 进入网易云音乐调试\n" +
-                "输入 QQ 进入QQ音乐调试");
+                "输入 QQ 进入QQ音乐调试\n" +
+                "输入 Kugou 进入酷狗音乐调试");
         String status = sc.next();
         if (status.equals("网易")){
             System.out.println("输入网易云邮箱");
@@ -45,21 +46,36 @@ public class Test {
                 System.out.println(art);
                 System.out.println(name);
             }
+        } else if (status.equals("QQ")) {
+            QQApi aapi = new QQApi();
+            try {
+                System.out.println("输入歌曲名称");
+                MusicInfo musicInfo = aapi.get(sc.next());
+                System.out.println(musicInfo.title);
+                System.out.println(musicInfo.desc);
+                System.out.println(musicInfo.purl);
+                System.out.println(musicInfo.murl);
+                System.out.println(musicInfo.jurl);
+                System.out.println(musicInfo.icon);
+                System.out.println(musicInfo.appid);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
-        QQApi aapi = new QQApi();
-        try {
-            System.out.println("输入歌曲名称");
-            MusicInfo musicInfo = aapi.get(sc.next());
-            System.out.println(musicInfo.title);
-            System.out.println(musicInfo.desc);
-            System.out.println(musicInfo.purl);
-            System.out.println(musicInfo.murl);
-            System.out.println(musicInfo.jurl);
-            System.out.println(musicInfo.icon);
-            System.out.println(musicInfo.appid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            KugouApi aapi = new KugouApi();
+            try {
+                System.out.println("输入歌曲名称");
+                MusicInfo musicInfo = aapi.get(sc.next());
+                System.out.println(musicInfo.title);
+                System.out.println(musicInfo.desc);
+                System.out.println(musicInfo.purl);
+                System.out.println(musicInfo.murl);
+                System.out.println(musicInfo.jurl);
+                System.out.println(musicInfo.icon);
+                System.out.println(musicInfo.appid);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 

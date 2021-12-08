@@ -6,21 +6,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 public final class Utils {
-    static boolean verbose = true;
 
-    /**
-     * Read all content from input stream.<br>
-     * 从数据流读取全部数据
-     *
-     * @param i the input stream<br>
-     *          数据流
-     * @return return all read data <br>
-     *         返回读入的所有数据
-     * @throws IOException Signals that an I/O exception has occurred.<br>
-     *                     发生IO错误
-     */
     public static byte[] readAll(InputStream i) throws IOException {
         ByteArrayOutputStream ba = new ByteArrayOutputStream(16384);
         int nRead;
@@ -31,7 +20,6 @@ public final class Utils {
                 ba.write(data, 0, nRead);
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             throw e;
         }
 
@@ -63,6 +51,9 @@ public final class Utils {
         } catch (IOException e) {
             throw e;
         }
+    }
+    public static long getTime() {
+        return new Date().getTime();
     }
     public static String fetchHttp(String url) throws IOException {
         try {
