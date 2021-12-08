@@ -66,6 +66,28 @@ public final class FlyMusic extends JavaPlugin implements Listener {
             onDisable();
             return;
         }
+        /*
+        if (Bukkit.getPluginManager().getPlugin("AmazingBot")!=null){
+            getLogger().info("检测到服务器使用AmazingBot框架 正在注册事件");
+            if (getConfig().getString("source").equals("net")){
+                Bukkit.getPluginManager().registerEvents(new NetEvent(),this);
+                getLogger().info("登录成功");
+            } else if (getConfig().getString("source").equals("qq")){
+                Bukkit.getPluginManager().registerEvents(new QQEvent(),this);
+            } else if (getConfig().getString("source").equals("kugou")){
+                Bukkit.getPluginManager().registerEvents(new KugouEvent(),this);
+            } else {
+                getLogger().info("请检查配置文件!");
+                onDisable();
+                return;
+            }
+        } else if (Bukkit.getPluginManager().getPlugin("MiraiMC")!=null){
+
+        } else {
+            getLogger().warning("没有检测到支持的框架 无法启动");
+            onDisable();
+            return;
+        }*/
         Bukkit.getPluginManager().registerEvents(new DoubleEvent(),this);
 
         // Plugin startup logic
