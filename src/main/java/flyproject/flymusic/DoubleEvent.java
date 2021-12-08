@@ -51,6 +51,7 @@ public class DoubleEvent implements Listener {
                         pic,
                         url
                 ));
+
             } else {
                 event.response("歌曲不存在");
             }

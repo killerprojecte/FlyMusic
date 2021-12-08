@@ -1,16 +1,15 @@
 package flyproject.flymusic;
 
-import java.io.BufferedReader;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import flyproject.flymusic.gson.JsonParser;
+
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class QQApi implements MusicSource {
 
