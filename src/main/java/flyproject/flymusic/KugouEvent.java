@@ -35,7 +35,6 @@ public class KugouEvent implements Listener {
         if (event.getMsg().startsWith("点歌 ")) {
             String arg = event.getMsg().replace("点歌 ", "");
             KugouApi aapi = new KugouApi();
-            System.out.println(arg);
             try {
                 MusicInfo musicInfo = aapi.get(arg);
                 event.response(new MusicShare(
