@@ -1,6 +1,8 @@
 name: FlyMusic
 version: '${version}'
 main: flyproject.flymusic.FlyMusic
-depend: [ AmazingBot ]
+softdepend:
+  - AmazingBot
+  - MiraiMC
 authors: [ FlyProject ]
-description: A MusicBot for AmazingBot in bukkit
+description: A QQ MusicBot in bukkit
