@@ -1,19 +1,15 @@
 
 package flyproject.flymusic;
 
-import ltd.icecold.orange.netease.api.NeteaseSearchAPI;
-import ltd.icecold.orange.netease.api.NeteaseSongAPI;
+
+import flyproject.flymusic.miraimc.MDoubleEvent;
+import flyproject.flymusic.miraimc.MKugouEvent;
+import flyproject.flymusic.miraimc.MNetEvent;
+import flyproject.flymusic.miraimc.MQQEvent;
 import ltd.icecold.orange.netease.api.NeteaseUserAPI;
-import ltd.icecold.orange.netease.bean.NeteaseResponseBody;
-import me.albert.amazingbot.events.GroupMessageEvent;
-import net.mamoe.mirai.message.data.MusicKind;
-import net.mamoe.mirai.message.data.MusicShare;
 import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -32,11 +28,12 @@ public final class FlyMusic extends JavaPlugin implements Listener {
                 " / __/ / / /_/ / /  / / /_/ (__  ) / /__  \n" +
                 "/_/   /_/\\__, /_/  /_/\\__,_/____/_/\\___/  \n" +
                 "        /____/                            \n\n" +
-                "(c) Copyright 2021 FlyProject" +
+                "(c) Copyright 2022 FlyProject" +
                 "§c§lThis Project Use GPLv3 Open Source License\n" +
                 "§c§lPlease respect the copyright of the author\n" +
                 "§e[Only published on MCBBS forum and Github]");
         saveDefaultConfig();
+        //登陆网易云账号
         if (getConfig().getString("net.type").equals("mail")){
             String username = getConfig().getString("net.username");
             String password = getConfig().getString("net.password");
@@ -54,20 +51,8 @@ public final class FlyMusic extends JavaPlugin implements Listener {
         } else {
             getLogger().info("登录失败");
         }
-        if (getConfig().getString("source").equals("net")){
-            Bukkit.getPluginManager().registerEvents(new NetEvent(),this);
-            getLogger().info("登录成功");
-        } else if (getConfig().getString("source").equals("qq")){
-            Bukkit.getPluginManager().registerEvents(new QQEvent(),this);
-        } else if (getConfig().getString("source").equals("kugou")){
-            Bukkit.getPluginManager().registerEvents(new KugouEvent(),this);
-        } else {
-            getLogger().info("请检查配置文件!");
-            onDisable();
-            return;
-        }
-        /*
-        if (Bukkit.getPluginManager().getPlugin("AmazingBot")!=null){
+        getLogger().warning("正在检测服务器已安装的框架 本插件默认优先使用AmazingBot");
+        if (Bukkit.getPluginManager().getPlugin("AmazingBot")!=null){ //注册AmazingBot
             getLogger().info("检测到服务器使用AmazingBot框架 正在注册事件");
             if (getConfig().getString("source").equals("net")){
                 Bukkit.getPluginManager().registerEvents(new NetEvent(),this);
@@ -81,18 +66,30 @@ public final class FlyMusic extends JavaPlugin implements Listener {
                 onDisable();
                 return;
             }
-        } else if (Bukkit.getPluginManager().getPlugin("MiraiMC")!=null){
-
+            Bukkit.getPluginManager().registerEvents(new DoubleEvent(),this);
+        } else if (Bukkit.getPluginManager().getPlugin("MiraiMC")!=null){ //注册MiraiMC - 2.0.0
+            getLogger().info("检测到服务器使用MiraiMC框架 正在注册事件");
+            if (getConfig().getString("source").equals("net")){
+                Bukkit.getPluginManager().registerEvents(new MNetEvent(),this);
+                getLogger().info("登录成功");
+            } else if (getConfig().getString("source").equals("qq")){
+                Bukkit.getPluginManager().registerEvents(new MQQEvent(),this);
+            } else if (getConfig().getString("source").equals("kugou")){
+                Bukkit.getPluginManager().registerEvents(new MKugouEvent(),this);
+            } else {
+                getLogger().info("请检查配置文件!");
+                onDisable();
+                return;
+            }
+            Bukkit.getPluginManager().registerEvents(new MDoubleEvent(),this);
         } else {
             getLogger().warning("没有检测到支持的框架 无法启动");
             onDisable();
             return;
-        }*/
-        Bukkit.getPluginManager().registerEvents(new DoubleEvent(),this);
-
-        // Plugin startup logic
-
+        }
+        //初始化完成
     }
+
     public static String getMD5Str(String str) {
         byte[] digest = null;
         try {

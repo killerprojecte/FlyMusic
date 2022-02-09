@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'flyproject'
-version = '1.0.3'
+version = '2.0.0'
 
 repositories {
     mavenCentral()
@@ -33,7 +33,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     implementation fileTree(dir: 'libs',includes: ['OrangeAPI-1.0.3.jar'])
     compileOnly 'com.github.mcdoeswhat:AmazingBot-3.0:3.2.31'
-    //implementation fileTree(dir: 'libs',includes: ['MiraiMC-Bukkit.jar'])
+    compileOnly fileTree(dir: 'libs',includes: ['MiraiMC-Bukkit.jar'])
 }
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
